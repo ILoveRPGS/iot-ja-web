@@ -1,0 +1,13 @@
+.click-area{
+    height: 700px;
+    width: 100%;
+    position: relative;
+}
+.shape{
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    position: absolute;
+    cursor: pointer;
+    position: absolute;
+}

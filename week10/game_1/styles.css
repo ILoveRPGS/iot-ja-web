@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    position: relative;
+    height: 700px;
+    width: 500px;
+    flex-direction: column;
+    margin: auto;
+
+}
+h1{
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+#guessing-game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,20 @@
+div{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+a{
+    max-width: 100%;;
+    font-size: x-large;
+    margin: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    div{
+        justify-content: center;
+    }
+    a{
+        font-size: x-large;
+    }
+    
+}

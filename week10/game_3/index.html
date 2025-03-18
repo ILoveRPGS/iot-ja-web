@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Math Game</h1>
+        <p>Enter the correct answer for each question</p>
+        <p>Click the submit button when you are done</p>
+        <p>Score: <span id="score">0</span></p>
+        <form id="multi-game">
+
+        </form>
+    </div>
+    
+</body>
+
+<script>
+    let gameValues = []; // Tehdään gameValues globaaliksi
+
+    const gameHandler = () => {
+        gameValues = [
+            { value1: Math.floor(Math.random() * 10), value2: Math.floor(Math.random() * 10), operator: '*' },
+            { value1: Math.floor(Math.random() * 10), value2: Math.floor(Math.random() * 10), operator: '*' },
+            { value1: Math.floor(Math.random() * 10), value2: Math.floor(Math.random() * 10), operator: '*' }
+        ];
+        
+        const form = document.getElementById('multi-game');
+        form.innerHTML = ''; // Tyhjennetään lomake ennen uusien elementtien lisäämistä
+        
+        gameValues.forEach((game, index) => {
+            const div = document.createElement('div');
+            const label = document.createElement('label');
+            label.textContent = `${game.value1} ${game.operator} ${game.value2} = `;
+
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.name = `game${index}`;
+
+            div.appendChild(label);
+            div.appendChild(input);
+            form.appendChild(div);
+        });
+
+        // Lisää submit-painike
+        const button = document.createElement('button');
+        button.textContent = 'Submit';
+        button.type = 'submit';
+        form.appendChild(button);
+        const resetButton = document.createElement('button');
+        resetButton.textContent = 'Reset';
+        resetButton.type = 'button';
+        resetButton.onclick = function() {
+            gameHandler();
+            document.getElementById('score').textContent = 0;
+        };
+        form.appendChild(resetButton);
+        const showButton = document.createElement('button');
+        showButton.textContent = 'Show answers';
+        showButton.type = 'button';
+        showButton.onclick = function() {
+            gameValues.forEach((game, index) => {
+                const input = document.querySelector(`input[name="game${index}"]`);
+                const answer = game.value1 * game.value2;
+                input.value = answer;
+            });
+        };
+        form.appendChild(showButton);
+        const hideButton = document.createElement('button');
+        hideButton.textContent = 'Hide answers';
+        hideButton.type = 'button';
+        hideButton.onclick = function() {
+            gameValues.forEach((game, index) => {
+                const input = document.querySelector(`input[name="game${index}"]`);
+                input.value = '';
+            });
+        };
+        form.appendChild(hideButton);
+    };
+
+    gameHandler(); // Käynnistetään peli
+    document.getElementById('multi-game').onsubmit = function(e) {
+        e.preventDefault();
+        let score = 0;
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((input, index) => {
+            const game = gameValues[index];
+            const answer = game.value1 * game.value2;
+            if (parseInt(input.value) === answer) {
+                score++;
+                input.style.backgroundColor = 'lightgreen';
+            } else {
+                input.style.backgroundColor = 'red';
+            }
+        });
+        document.getElementById('score').textContent = score;
+    };
+</script>
+
+</html>

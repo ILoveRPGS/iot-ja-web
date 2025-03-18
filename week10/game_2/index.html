@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Reaction game</h1>
+    <p>Click on the shape as fast as you can!</p>
+    <p>Time taken: <span class="time-taken"></span></p>
+
+    <div class="click-area">
+        <div class="shape"></div>
+    </div>
+    
+</body>
+<script>
+    let start = new Date().getTime();
+    function getRandomColor(){
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for(let i = 0; i < 6; i++){
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    function makeShapeAppear(){
+        let top = Math.random() * 800;
+        let left = Math.random() * 800;
+        if(Math.random() > 0.5){
+            document.querySelector('.shape').style.borderRadius = '50%';
+        }else{
+            document.querySelector('.shape').style.borderRadius = '0';
+        }
+        document.querySelector('.shape').style.backgroundColor = getRandomColor();
+        document.querySelector('.shape').style.top = top + 'px';
+        document.querySelector('.shape').style.left = left + 'px';
+        document.querySelector('.shape').style.display = 'block';
+        start = new Date().getTime();
+    }
+    function appearAfterDelay(){
+        setTimeout(() => {
+            makeShapeAppear();
+        }, Math.random() * 2000);
+    }
+    appearAfterDelay();
+    document.querySelector('.shape').onclick = () => {
+        document.querySelector('.shape').style.display = 'none';
+        let end = new Date().getTime();
+        let timeTaken = (end - start) / 1000;
+        document.querySelector('.time-taken').innerHTML = timeTaken + 's';
+        appearAfterDelay();
+    }
+</script>
+</html>
