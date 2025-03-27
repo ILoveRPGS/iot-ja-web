@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    font-size: 15vw;
+}
+.timer {
+    border-radius: 15px;
+    margin: auto;
+    display: flex;
+    width: 80vw;
+    min-width: 400px;
+    flex-direction: wrap;
+    justify-content: space-evenly;
+    background-color: #000000e6;
+    min-height: 400px;
+    max-height: 800px;
+}
+.days, .hours, .minutes, .seconds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 10px;
+    background-color: #252525;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.days span, .hours span, .minutes span, .seconds span {
+    font-weight: bold;
+}

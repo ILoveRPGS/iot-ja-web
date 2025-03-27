@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="timer">
+        <div class="days">0</div>
+        <div class="hours">0</div>
+        <div class="minutes">0</div>
+        <div class="seconds">0</div>
+    </div>
+
+    <!-- Include Day.js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"></script>
+    <!-- Include Duration Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/duration.js"></script>
+
+    <script type="module">
+    
+        dayjs.extend(dayjs_plugin_duration);
+
+        //Määräpäivä
+        const eventDate = dayjs('2025-04-03T12:00:00'); 
+
+       //Referenssit
+        const daysElement = document.querySelector('.days');
+        const hoursElement = document.querySelector('.hours');
+        const minutesElement = document.querySelector('.minutes');
+        const secondsElement = document.querySelector('.seconds');
+
+        //Päivitetään joka sekuntti
+        function updateCountdown() {
+            // nykypäivä
+            const now = dayjs();
+
+            // Erotus
+            const timeRemaining = eventDate.diff(now);
+
+            if (timeRemaining <= 0) {
+                //lopeta ajastin
+                clearInterval(countdownInterval);
+                daysElement.textContent = '0';
+                hoursElement.textContent = '0';
+                minutesElement.textContent = '0';
+                secondsElement.textContent = '0';
+            } else {
+                // Lasketaan aika
+                const duration = dayjs.duration(timeRemaining);
+                const remainingDays = duration.days();
+                const remainingHours = duration.hours();
+                const remainingMinutes = duration.minutes();
+                const remainingSeconds = duration.seconds();
+
+                // Päivitys
+                daysElement.textContent = remainingDays;
+                hoursElement.textContent = remainingHours < 10 ? '0' + remainingHours : remainingHours;
+                minutesElement.textContent = remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes;
+                secondsElement.textContent = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+            }
+        }
+
+        // Intervali
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        updateCountdown();
+    </script>
+</body>
+</html>
