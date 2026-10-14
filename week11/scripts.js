@@ -1,6 +1,9 @@
+// WeatherAPI.com key: use your own and do NOT commit it to git.
+const API_KEY = 'YOUR_WEATHERAPI_KEY';
+
 const call = async () => {
     try{
-        const response = await fetch('http://api.weatherapi.com/v1/current.json?key=489e117e4e00452988491921251803&q=Tampere&aqi=no', {
+        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=Tampere&aqi=no`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
